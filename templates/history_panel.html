@@ -1,0 +1,24 @@
+{% import 'icons.html' as icons %}
+<aside class="history-panel{% if history_panel_visible %} is-visible{% endif %}" id="historyPanel" aria-label="Panel riwayat perhitungan">
+  <div class="history-head">
+    <h2>Riwayat</h2>
+    <button type="button" class="icon-button" id="historyClose" aria-label="Tutup riwayat">{{ icons.icon('x') }}</button>
+  </div>
+  <div class="history-list" id="historyList">
+    {% if history %}
+      {% for item in history %}
+      <button type="button" class="history-item" data-history-index="{{ loop.index0 }}">
+        <span class="history-symbol">{{ icons.icon(item.icon, 'icon-sm') }}</span>
+        <span class="history-text"><strong>{{ item.title }}</strong><small>{{ item.detail }}</small></span>
+        <time>{{ item.time }}</time>
+        {{ icons.icon('chevron') }}
+      </button>
+      {% endfor %}
+    {% else %}
+      <div class="empty-history">Belum ada riwayat perhitungan.</div>
+    {% endif %}
+  </div>
+
+  <button type="button" class="clear-history" id="clearHistory">{{ icons.icon('trash') }} <span>Hapus Riwayat</span></button>
+</aside>
+<button type="button" class="history-unhide" id="historyUnhide" aria-label="Tampilkan riwayat" hidden>{{ icons.icon('history') }} <span>Tampilkan Riwayat</span></button>

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% import 'icons.html' as icons %}
+{% block title %}{{ title }} — CalcSpace{% endblock %}
+{% block body %}
+<main class="history-page-workspace">
+  <section class="history-page-card" aria-labelledby="historyPageTitle">
+    <a class="back-link" href="{{ back_url|default(url_for('index')) }}">{{ back_label|default('← Kembali ke Beranda') }}</a>
+    <div class="history-page-head">
+      <div>
+        <span class="result-eyebrow">History</span>
+        <h1 id="historyPageTitle">{{ title }}</h1>
+        <p>{{ subtitle }}</p>
+      </div>
+      {% if not current_category %}
+      <div class="history-filter-links" aria-label="Filter riwayat">
+        <a class="active" href="{{ url_for('history_page') }}">Semua</a>
+        {% for cat in categories %}
+        <a href="{{ url_for('history_category', category=cat.slug, from='all') }}">{{ cat.title }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="history-page-list" id="historyList">
+      {% if history %}
+        {% for item in history %}
+        <button type="button" class="history-item history-page-item" data-history-index="{{ loop.index0 }}">
+          <span class="history-symbol">{{ icons.icon(item.icon, 'icon-sm') }}</span>
+          <span class="history-text"><strong>{{ item.title }}</strong><small>{{ item.detail }}</small></span>
+          <time>{{ item.time }}</time>
+          {{ icons.icon('chevron') }}
+        </button>
+        {% endfor %}
+      {% else %}
+        <div class="empty-history history-empty-large">Belum ada riwayat perhitungan.</div>
+      {% endif %}
+    </div>
+
+    <button type="button" class="clear-history history-page-clear" id="clearHistory">{{ icons.icon('trash') }} <span>Hapus Riwayat</span></button>
+  </section>
+</main>
+{% endblock %}
