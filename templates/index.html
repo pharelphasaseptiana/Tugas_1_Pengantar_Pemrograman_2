@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% import 'icons.html' as icons %}
+{% block body %}
+<main class="workspace home-workspace">
+  <section class="home-main" aria-labelledby="pageTitle">
+    <div class="hero-copy">
+      <h1 id="pageTitle">Beranda CalcSpace</h1>
+      <p>Pilih kategori kalkulator yang ingin Anda gunakan<br>untuk memulai perhitungan.</p>
+    </div>
+
+    <div class="category-grid" aria-label="Kategori kalkulator">
+      <div class="category-row category-row-top">
+        {% for category in categories[:4] %}
+        <a class="category-card" href="{{ url_for('calculator', category=category.slug) }}">
+          <div class="category-icon">{{ icons.icon(category.icon) }}</div>
+          <h2>{{ category.title }}</h2>
+          <p>{{ category.subtitle }}</p>
+        </a>
+        {% endfor %}
+      </div>
+      <div class="category-row category-row-bottom">
+        {% for category in categories[4:] %}
+        <a class="category-card" href="{{ url_for('calculator', category=category.slug) }}">
+          <div class="category-icon">{{ icons.icon(category.icon) }}</div>
+          <h2>{{ category.title }}</h2>
+          <p>{{ category.subtitle }}</p>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
