@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% import 'icons.html' as icons %}
+{% block title %}{{ category.title }} — CalcSpace{% endblock %}
+{% block body %}
+<main class="workspace calc-workspace">
+  <section class="calculator-main" aria-labelledby="calcTitle">
+    <div class="calculator-card">
+      <a class="back-link" href="{{ url_for('index') }}">← Beranda</a>
+      <div class="calc-heading">
+        <span class="calc-heading-icon">{{ icons.icon(category.icon, 'icon-lg') }}</span>
+        <span>
+          <h1 id="calcTitle">{{ category.title }}</h1>
+          <p>{{ category.subtitle }}</p>
+        </span>
+      </div>
+
+      <form class="calc-form" id="calcForm" data-category="{{ category.slug }}" autocomplete="off">
+        {% if category.slug == 'arithmetic' %}
+          <div class="field-row">
+            <label>Bilangan A<input name="a" type="number" step="any" placeholder="Contoh: 125" required></label>
+            <label id="secondOperandField">Bilangan B<input name="b" id="secondOperand" type="number" step="any" placeholder="Contoh: 87" required></label>
+          </div>
+          <label>Operasi
+            <select name="operation" id="arithmeticOperation" data-placeholder="Pilih operasi">
+              <option value="" selected disabled hidden>Pilih operasi</option><option>+</option><option>-</option><option>×</option><option>÷</option><option>pangkat</option><option>akar</option><option>modulus</option><option>floor division</option>
+            </select>
+          </label>
+        {% elif category.slug == 'logic' %}
+          <div class="field-row">
+            <label>P<select name="p" data-placeholder="Pilih nilai P"><option value="" selected disabled hidden>Pilih nilai P</option><option value="true">True</option><option value="false">False</option></select></label>
+            <label id="logicQField">Q<select name="q" id="logicQ" data-placeholder="Pilih nilai Q"><option value="" selected disabled hidden>Pilih nilai Q</option><option value="true">True</option><option value="false">False</option></select></label>
+          </div>
+          <label>Operator
+            <select name="operation" id="logicOperation" data-placeholder="Pilih operator">
+              <option value="" selected disabled hidden>Pilih operator</option>{% for op in logic_operators %}<option>{{ op }}</option>{% endfor %}
+            </select>
+          </label>
+        {% elif category.slug == 'base' %}
+          <label>Bilangan<input name="number" type="text" placeholder="Contoh: 1111010" required></label>
+          <div class="field-row">
+            <label>Dari Basis<select name="from_base" data-placeholder="Pilih basis asal"><option value="" selected disabled hidden>Pilih basis asal</option>{% for base in bases %}<option>{{ base }}</option>{% endfor %}</select></label>
+            <label>Ke Basis<select name="to_base" data-placeholder="Pilih basis tujuan"><option value="" selected disabled hidden>Pilih basis tujuan</option>{% for base in bases %}<option>{{ base }}</option>{% endfor %}</select></label>
+          </div>
+        {% elif category.slug == 'temperature' %}
+          <label>Nilai Suhu<input name="value" type="number" step="any" placeholder="Contoh: 25" required></label>
+          <div class="field-row">
+            <label>Dari Satuan<select name="from_unit" data-placeholder="Pilih satuan asal"><option value="" selected disabled hidden>Pilih satuan asal</option>{% for unit in temp_units %}<option>{{ unit }}</option>{% endfor %}</select></label>
+            <label>Ke Satuan<select name="to_unit" data-placeholder="Pilih satuan tujuan"><option value="" selected disabled hidden>Pilih satuan tujuan</option>{% for unit in temp_units %}<option>{{ unit }}</option>{% endfor %}</select></label>
+          </div>
+        {% elif category.slug == 'currency' %}
+          <label>Jumlah<input name="amount" type="number" step="any" placeholder="Contoh: 10" required></label>
+          <div class="field-row">
+            <label>Dari Mata Uang<select name="from_currency" data-placeholder="Pilih mata uang asal"><option value="" selected disabled hidden>Pilih mata uang asal</option>{% for currency in currencies %}<option>{{ currency }}</option>{% endfor %}</select></label>
+            <label>Ke Mata Uang<select name="to_currency" data-placeholder="Pilih mata uang tujuan"><option value="" selected disabled hidden>Pilih mata uang tujuan</option>{% for currency in currencies %}<option>{{ currency }}</option>{% endfor %}</select></label>
+          </div>
+        {% elif category.slug == 'factorial' %}
+          <label>Nilai n<input name="n" type="number" min="0" max="500" placeholder="Contoh: 5" required></label>
+        {% elif category.slug == 'fibonacci' %}
+          <label>Jumlah Suku<input name="n" type="number" min="1" max="100" placeholder="Contoh: 10" required></label>
+        {% endif %}
+        <button class="submit-button" type="submit">Hitung Sekarang</button>
+      </form>
+    </div>
+
+    <section class="result-card" id="resultCard" hidden>
+      <span class="result-eyebrow">Hasil Perhitungan</span>
+      <strong id="resultValue"></strong>
+      <div class="result-section">
+        <h3>Rumus yang digunakan</h3>
+        <p id="formulaText"></p>
+      </div>
+      <div class="result-section">
+        <h3>Penjelasan langkah demi langkah</h3>
+        <ol id="stepsList"></ol>
+      </div>
+      {% if category.slug == 'logic' %}
+      <div class="result-section gate-section" id="gateSection" hidden>
+        <h3>Gate Diagram</h3>
+        <div class="gate-diagram-wrap">
+          <div class="gate-diagram-board" id="gateDiagram"></div>
+        </div>
+      </div>
+      {% endif %}
+    </section>
+  </section>
+
+  {% include 'history_panel.html' %}
+</main>
+{% endblock %}
