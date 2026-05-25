@@ -1,0 +1,50 @@
+{% macro icon(name, size='icon-xl') %}
+{% if name == 'logo' %}
+<svg class="brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+  <rect x="10" y="6" width="44" height="52" rx="8" fill="currentColor"/>
+  <rect x="17" y="13" width="30" height="12" rx="3" fill="white"/>
+  <circle cx="22" cy="36" r="4" fill="white"/>
+  <circle cx="32" cy="36" r="4" fill="white"/>
+  <circle cx="42" cy="36" r="4" fill="white"/>
+  <circle cx="22" cy="48" r="4" fill="white"/>
+  <circle cx="32" cy="48" r="4" fill="white"/>
+  <circle cx="42" cy="48" r="4" fill="white"/>
+</svg>
+{% elif name == 'arithmetic' %}
+<img class="{{ size }} generated-icon generated-icon-arithmetic" src="{{ url_for('static', filename='img/arithmetic_generated.png') }}" alt="" aria-hidden="true">
+{% elif name == 'logic' %}
+<svg class="{{ size }}" viewBox="0 0 96 84" fill="none" aria-hidden="true">
+  <path d="M24 21h21c16 0 27 9 27 21S61 63 45 63H24V21Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M8 31h16M8 53h16M72 42h13" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="78" cy="42" r="5" fill="white" stroke="currentColor" stroke-width="4"/>
+</svg>
+{% elif name == 'base' %}
+<img class="{{ size }} generated-icon generated-icon-base" src="{{ url_for('static', filename='img/base_generated.png') }}" alt="" aria-hidden="true">
+{% elif name == 'temperature' %}
+<img class="{{ size }} generated-icon generated-icon-temperature" src="{{ url_for('static', filename='img/temperature_generated.png') }}" alt="" aria-hidden="true">
+{% elif name == 'currency' %}
+<img class="{{ size }} generated-icon generated-icon-currency" src="{{ url_for('static', filename='img/currency_generated.png') }}" alt="" aria-hidden="true">
+{% elif name == 'factorial' %}
+<svg class="{{ size }}" viewBox="0 0 96 84" fill="none" aria-hidden="true">
+  <text x="20" y="60" font-size="50" font-weight="800" fill="currentColor" font-family="Arial, sans-serif">n!</text>
+</svg>
+{% elif name == 'fibonacci' %}
+<img class="{{ size }} generated-icon generated-icon-fibonacci" src="{{ url_for('static', filename='img/fibonacci_generated.png') }}" alt="" aria-hidden="true">
+{% elif name == 'sun' %}
+<svg class="button-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M19.8 4.2l-2.1 2.1M6.3 17.7l-2.1 2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+{% elif name == 'history' %}
+<svg class="button-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 4v5h5M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{% elif name == 'menu' %}
+<svg class="button-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+{% elif name == 'moon' %}
+<svg class="button-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 7 7 0 1 0 20 15.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+{% elif name == 'trash' %}
+<svg class="button-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M9 7l1-2h4l1 2M6 7l1 14h10l1-14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{% elif name == 'info' %}
+<svg class="info-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 10v7M12 7h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+{% elif name == 'chevron' %}
+<svg class="chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{% elif name == 'x' %}
+<svg class="x-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+{% endif %}
+{% endmacro %}
